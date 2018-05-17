@@ -150,6 +150,7 @@ func makeFunctionBody(name string, art *artifact, async *bool) string {
 	} else {
 		// we need to pass transaction value and gas here
 		if *async {
+			// callbacks - to do
 			js = fmt.Sprintf(functionBody, instance, method, inputArgs, trnsObj)
 		} else {
 			js = fmt.Sprintf(functionBody, instance, method, inputArgs, trnsObj)
@@ -159,29 +160,12 @@ func makeFunctionBody(name string, art *artifact, async *bool) string {
 }
 
 func isEvent() {
+	// not implemented yet
 
 }
 
 func isConstructor() {
-
-}
-
-//func Provider() {}
-
-func isGetter() {
-
-}
-
-func isSetter() {
-
-}
-
-func isView() {
-
-}
-
-func isPayable() {
-
+	// not implemented yet
 }
 
 // InitWeb3 includes JavaScript to initialise web provider,
