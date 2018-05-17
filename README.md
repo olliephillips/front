@@ -1,7 +1,5 @@
 # Front
-## git remote add origin git@github.com:olliephillips/front.git
-
-Outputs boilerplate web3.js compatible JavaScript by compiling from solidity or reading smart contract ABI. 
+## Outputs boilerplate web3.js compatible JavaScript by compiling from solidity or reading smart contract ABI. 
 
 ## Install
 
