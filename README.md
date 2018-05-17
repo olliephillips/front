@@ -3,16 +3,16 @@
 
 Outputs boilerplate web3.js compatible JavaScript by compiling from solidity or reading smart contract ABI. 
 
-###Install
+## Install
 
 It's a Go packahge so `go get` and `go install` it. When more complete I'll add binaries.
 
-###Usage 
+## Usage 
 
 ```front --h```
 
 
-###Status
+## Status
 
 - Function generation is fairly well implemented.  
 - Async/callbacks in progress.
