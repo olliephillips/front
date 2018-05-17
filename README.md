@@ -1,5 +1,5 @@
 # Front
-## Outputs boilerplate web3.js compatible JavaScript by compiling from solidity or reading smart contract ABI. 
+Outputs boilerplate web3.js compatible JavaScript by compiling from solidity or reading smart contract ABI. 
 
 ## Install
 
@@ -8,7 +8,6 @@ It's a Go packahge so `go get` and `go install` it. When more complete I'll add 
 ## Usage 
 
 ```front --h```
-
 
 ## Status
 
