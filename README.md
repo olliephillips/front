@@ -12,15 +12,18 @@ It's a Go package so `go get` and `go install` it. When more complete I'll add b
 
 ## Usage 
 
-```front --h```
+```
+front --h
+```
 
-```Usage of ./front:
+```
+Usage of ./front:
   -abi string
         Path to the Ethereum contract ABI json to convert
   -address string
         Address of the contract/contracts
-  -callbacks
-        Use callbacks in generate javascript (default true)
+  -async
+        Use asynchronous callbacks in with state changing functions
   -out string
         Output file for the generated web3.js javascript (default = stdout)
   -sol string
