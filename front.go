@@ -84,7 +84,7 @@ func main() {
 
 	// generate web3.js methods by passing each abi in turn
 	for i := range abis {
-		converted, err := abi2js.Convert(contractName[i], abis[i], *asyncFlag)
+		converted, err := abi2js.Convert(contractName[i], abis[i], asyncFlag)
 		if err != nil {
 			fmt.Printf("Failed to convert ABI to JavaScript: %v\n", err)
 			os.Exit(-1)

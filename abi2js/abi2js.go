@@ -118,7 +118,7 @@ func makeFunctionComment(art *artifact) string {
 }
 
 func makeFunctionBody(name string, art *artifact, async *bool) string {
-	var res, instance, method, inputArgs, trnsObj, js string
+	var res, instance, method, inputArgs, trnsObj, callback, js string
 	res = camelCase(art.Name) + "Res"
 	instance = camelCase(name)
 	method = art.Name
@@ -149,7 +149,8 @@ func makeFunctionBody(name string, art *artifact, async *bool) string {
 		// we need to pass transaction value and gas here
 		if *async {
 			// callbacks - to do
-			js = fmt.Sprintf(functionBody, instance, method, inputArgs, trnsObj)
+			callback = callbackAsync
+			js = fmt.Sprintf(functionBodyAsync, instance, method, inputArgs, trnsObj, callback)
 		} else {
 			js = fmt.Sprintf(functionBody, instance, method, inputArgs, trnsObj)
 		}

@@ -28,4 +28,11 @@ var viewFunctionBody = `var %s = %s.%s(%s);`
 
 var functionBody = `%s.%s(%s%s);`
 
-var functionBodyAsync = `%s.%s(%s%s);`
+var functionBodyAsync = `%s.%s(%s%s%s);`
+
+var callbackAsync = `, function(err, res){
+  if(!err)
+    // console.log(JSON.stringify(res));
+  else
+   console.log(err);	
+}`
