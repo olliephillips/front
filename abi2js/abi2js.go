@@ -129,9 +129,7 @@ func makeFunctionBody(name string, art *artifact, async *bool) string {
 			inputArgs += name + ", "
 		}
 	}
-	if *async {
 
-	}
 	// operations dependent on function type
 	switch art.StateMutability {
 	case "nonpayable":
