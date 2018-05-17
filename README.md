@@ -1,5 +1,7 @@
 # Front
 
+WORK IN PROGRESS
+
 Outputs boilerplate web3.js compatible JavaScript by compiling from solidity or reading smart contract ABI. 
 
 There's some [sample output here](https://github.com/olliephillips/front/blob/master/sample.js). It's incomplete, but you can see what I'm aiming for. It will be output commented out, I've uncommented for syntax highlighting.
