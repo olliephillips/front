@@ -36,6 +36,5 @@ If some of that looks familiar its because I wanted to give the application simi
 
 ## Status
 
-- Function generation is fairly well implemented
-- Events to do
+- Function and events done
 - Constructors (new contract) to do
