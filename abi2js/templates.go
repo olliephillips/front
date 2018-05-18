@@ -30,7 +30,7 @@ var functionBody = `%s.%s(%s%s);`
 
 var functionBodyAsync = `%s.%s(%s%s%s);`
 
-var callbackAsync = `, function(err, res){
+var callbackAsync = `, (err, res) => {
   if(!err)
     // console.log(JSON.stringify(res));
   else
@@ -43,16 +43,18 @@ var eventComment = `
 
 var eventBody = `
 // init and watch for %s event
-var %s = %s.%s({}, { fromBlock: 0, toBlock: 'latest' }, function(err, evt){
+var %s = %s.%s({}, { fromBlock: 0, toBlock: 'latest' }, (err, evt) => {
   if (!err)
     console.log(evt);
   else 
     console.log(err);
 });
+
 // get entire log for %s
-var %s = %s.get(function(err, log){
+var %s = %s.get((err, log) => {
   if(!err)
     console.log(log);
 });
+
 // stop watching %s event
 %s.stopWatching();`
