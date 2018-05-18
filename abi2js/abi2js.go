@@ -68,9 +68,6 @@ func isFunction(name string, art *artifact, async *bool) (string, error) {
 	// make body
 	js += makeFunctionBody(name, art, async)
 
-	// make callback
-	//js += makeFunctionCallback(art)
-
 	return js, err
 }
 
