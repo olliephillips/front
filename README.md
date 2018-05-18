@@ -36,6 +36,6 @@ If some of that looks familiar its because I wanted to give the application simi
 
 ## Status
 
-- Function generation is fairly well implemented.  
-- Async/callbacks in progress.
-- Events and constructor all to do.
+- Function generation is fairly well implemented
+- Events to do
+- Constructors (new contract) to do
