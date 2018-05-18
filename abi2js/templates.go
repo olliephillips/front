@@ -36,3 +36,23 @@ var callbackAsync = `, function(err, res){
   else
    console.log(err);	
 }`
+
+var eventComment = `
+
+// %s is an event. %s`
+
+var eventBody = `
+// init and watch for %s event
+var %s = %s.%s({}, { fromBlock: 0, toBlock: 'latest' }, function(err, evt){
+  if (!err)
+    console.log(evt);
+  else 
+    console.log(err);
+});
+// get entire log for %s
+var %s = %s.get(function(err, log){
+  if(!err)
+    console.log(log);
+});
+// stop watching %s event
+%s.stopWatching();`
