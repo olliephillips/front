@@ -56,3 +56,51 @@ savingsAccount.ShareFallback({gas:0});
 // ChangeOwner is a function. It accepts _newOwner type address.
 // Transaction object parameter 'gas' is wei denominated
 savingsAccount.ChangeOwner(_newOwner, {gas:0});
+
+// ContractDeposit is an event. It sends type address, type uint256 on occurence
+// init and watch for ContractDeposit event
+var contractDepositEvent = savingsAccount.ContractDeposit({}, { fromBlock: 0, toBlock: 'latest' }, function(err, evt){
+  if (!err)
+        console.log(evt);
+  else
+    console.log(err);
+});
+// get entire log for contractDepositEvent
+var contractDepositEventLog = contractDepositEvent.get(function(err, log){
+  if(!err)
+    console.log(log);
+});
+// stop watching contractDepositEvent event
+contractDepositEvent.stopWatching();
+
+// DirectDeposit is an event. It sends type string, type address, type uint256 on occurence
+// init and watch for DirectDeposit event
+var directDepositEvent = savingsAccount.DirectDeposit({}, { fromBlock: 0, toBlock: 'latest' }, function(err, evt){
+  if (!err)
+        console.log(evt);
+  else
+    console.log(err);
+});
+// get entire log for directDepositEvent
+var directDepositEventLog = directDepositEvent.get(function(err, log){
+  if(!err)
+    console.log(log);
+});
+// stop watching directDepositEvent event
+directDepositEvent.stopWatching();
+
+// Distribution is an event. It sends type string, type uint256 on occurence
+// init and watch for Distribution event
+var distributionEvent = savingsAccount.Distribution({}, { fromBlock: 0, toBlock: 'latest' }, function(err, evt){
+  if (!err)
+        console.log(evt);
+  else
+    console.log(err);
+});
+// get entire log for distributionEvent
+var distributionEventLog = distributionEvent.get(function(err, log){
+  if(!err)
+    console.log(log);
+});
+// stop watching distributionEvent event
+distributionEvent.stopWatching();
