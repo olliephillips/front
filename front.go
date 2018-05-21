@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	addrFlag  = flag.String("address", "", "Address of the contract/contracts")
+	addrFlag  = flag.String("address", "", "Address of existing contract/contracts")
 	asyncFlag = flag.Bool("async", false, "Use asynchronous callbacks in with state changing functions")
 	abiFlag   = flag.String("abi", "", "Path to the Ethereum contract ABI json to convert")
 	solFlag   = flag.String("sol", "", "Path to the Ethereum contract Solidity source to build and convert")
@@ -38,6 +38,7 @@ func main() {
 	}
 
 	var abis []string
+	var byteCode []string
 	var contractName []string
 
 	if *solFlag != "" {
@@ -52,6 +53,7 @@ func main() {
 			goodname := strings.Split(name, ":")
 			abi, _ := json.Marshal(contract.Info.AbiDefinition)
 			abis = append(abis, string(abi))
+			byteCode = append(byteCode, contract.Code)
 			contractName = append(contractName, goodname[1])
 		}
 	} else {
@@ -77,14 +79,16 @@ func main() {
 		js += abi2js.IncludeABI(contractName[i], abis[i])
 	}
 
-	// contract instantiation javascript
-	for i := range abis {
-		js += abi2js.InitContract(contractName[i])
+	// include bytecode if address not provided will be used to construct
+	if *addrFlag == "" {
+		for i := range abis {
+			js += abi2js.IncludeByteCode(contractName[i], byteCode[i])
+		}
 	}
 
 	// generate web3.js methods by passing each abi in turn
 	for i := range abis {
-		converted, err := abi2js.Convert(contractName[i], abis[i], asyncFlag)
+		converted, err := abi2js.Convert(contractName[i], abis[i], asyncFlag, addrFlag)
 		if err != nil {
 			fmt.Printf("Failed to convert ABI to JavaScript: %v\n", err)
 			os.Exit(-1)

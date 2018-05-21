@@ -3,6 +3,7 @@ package abi2js
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 )
@@ -24,21 +25,38 @@ type artifact struct {
 
 // Convert takes contract ABI in JSON format and
 // converts it to web3.js compatible javascript code
-func Convert(name string, abi string, async *bool) (string, error) {
+func Convert(name string, abi string, async *bool, addr *string) (string, error) {
 	var err error
 	var js string
 
 	var artifacts []artifact
 	json.Unmarshal([]byte(abi), &artifacts)
 
+	// need the constructor at this point, want it at the top
+	// before the functions & events in the output
 	for i := range artifacts {
-		val, err := parse(name, &artifacts[i], async)
-		if err != nil {
-			fmt.Printf("Failed to parse ABI artifact: %v\n", err)
-			os.Exit(-1)
+		if artifacts[i].Type == "constructor" {
+			log.Println("running")
+			val, err := parse(name, &artifacts[i], async, addr)
+			if err != nil {
+				fmt.Printf("Failed to parse ABI artifact: %v\n", err)
+				os.Exit(-1)
+			}
+			//ok
+			js += val
 		}
-		// ok
-		js += val
+	}
+
+	for i := range artifacts {
+		if artifacts[i].Type != "constructor" {
+			val, err := parse(name, &artifacts[i], async, addr)
+			if err != nil {
+				fmt.Printf("Failed to parse ABI artifact: %v\n", err)
+				os.Exit(-1)
+			}
+			// ok
+			js += val
+		}
 	}
 
 	return js, err
@@ -59,28 +77,27 @@ func IncludeABI(name string, abi string) string {
 	return js
 }
 
-// InitContract includes JavaScript to initialise contracts based on ABI
-func InitContract(name string) string {
-	var contractName, camelName, js string
-	contractName = name + "Contract"
-	camelName = strings.ToLower(string(name[0])) + name[1:]
-	js = fmt.Sprintf(initContract, contractName, contractName, name, camelName, contractName, camelName, contractName)
+// IncludeByteCode sets up a variable with the contract bytecode
+// required to deploy a new contract via constructor
+func IncludeByteCode(name string, code string) string {
+	var js string
+	js = fmt.Sprintf(byteCodeSyntax, name, name, code)
 	return js
 }
 
-func parse(name string, art *artifact, async *bool) (string, error) {
+func parse(name string, art *artifact, async *bool, addr *string) (string, error) {
 	// identify what this artifact is, and hand off
 	var js string
 	var err error
 
 	switch art.Type {
+	case "constructor":
+		js, err = isConstructor(name, art, addr)
 	case "function":
 		js, err = isFunction(name, art, async)
 	case "event":
-		// events are alway async
+		// events are always async
 		js, err = isEvent(name, art)
-	case "constructor":
-		//js, err = isConstructor(art)
 	}
 	return js, err
 }
@@ -89,9 +106,3 @@ func camelCase(input string) string {
 	// utility func for making camelCase strings
 	return strings.ToLower(string(input[0])) + input[1:]
 }
-
-/*
-func isConstructor() {
-	// not implemented yet
-}
-*/

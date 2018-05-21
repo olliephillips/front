@@ -15,14 +15,31 @@ var functionComment = `
 `
 var abiSyntax = `
 // %s contract ABI
-var %sABI = %s
+var %sABI = %s;
 `
-var initContract = `
+
+var byteCodeSyntax = `
+// %s contract bytecode
+var %sByteCode = '%s';
+`
+
+var initContractFromAddress = `
 // %s is a contract object
 var %s = web3.eth.contract(%sABI);
 
-// %s is an instance of the %s contract object
-var %s = %s.at('CONTRACTADDRESSHERE');`
+// %s is an instance of the %s
+// contract object, created using existing contract address
+var %s = %s.at('0x%x');`
+
+var initNewContract = `
+// %s is a contract object
+var %s = web3.eth.contract(%sABI);
+
+// %s is an instance of the %s
+// contract object, created as a new contract via Constructor.%s
+var %sDeployAddress = web3.eth.accounts[0];
+var %sGas = web3.eth.estimateGas({data: %sByteCode});
+var %s = %s.new(%s{data: %sByteCode, from: %sDeployAddress, gas: %sGas});`
 
 var viewFunctionBody = `var %s = %s.%s(%s);`
 
