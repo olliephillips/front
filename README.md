@@ -4,7 +4,7 @@ WORK IN PROGRESS
 
 Outputs boilerplate web3.js compatible JavaScript by compiling from solidity or reading smart contract ABI. 
 
-There's some [sample output here](https://github.com/olliephillips/front/blob/master/sample.js). Normally, generated output will commented out, comments are omitted here for syntax highlighting.
+There's some [sample output here](https://github.com/olliephillips/front/blob/master/sample.js). Normally, generated output will be commented out, comments are omitted here for syntax highlighting.
 
 ## Install
 
