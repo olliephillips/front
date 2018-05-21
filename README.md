@@ -4,7 +4,7 @@ WORK IN PROGRESS
 
 Outputs boilerplate web3.js compatible JavaScript by compiling from solidity or reading smart contract ABI. 
 
-There's some [sample output here](https://github.com/olliephillips/front/blob/master/sample.js). It's incomplete, but you can see what I'm aiming for. It will be output commented out, I've uncommented for syntax highlighting.
+There's some [sample output here](https://github.com/olliephillips/front/blob/master/sample.js). Normally, generated output will commented out, comments are omitted here for syntax highlighting.
 
 ## Install
 
@@ -34,7 +34,8 @@ Usage of ./front:
 
 If some of that looks familiar its because I wanted to give the application similar feel to Ethereum's abigen.
 
+
 ## Status
 
-- Function and events done
-- Constructors (new contract) to do
+- Constructor, functions & events all done
+- Testing to do
