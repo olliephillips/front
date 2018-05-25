@@ -3,7 +3,6 @@ package abi2js
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 )
@@ -36,7 +35,6 @@ func Convert(name string, abi string, async *bool, addr *string) (string, error)
 	// before the functions & events in the output
 	for i := range artifacts {
 		if artifacts[i].Type == "constructor" {
-			log.Println("running")
 			val, err := parse(name, &artifacts[i], async, addr)
 			if err != nil {
 				fmt.Printf("Failed to parse ABI artifact: %v\n", err)
